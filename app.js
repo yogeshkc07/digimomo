@@ -2,8 +2,12 @@ const express = require("express");
 const app = express();
 
 const { connectDatabase } = require("./database/database");
-const authRoute = require("./routes/authRoute");
-const productRoute = require("./routes/productRoute");
+
+const authRoute = require("./routes/auth/authRoute");
+const productRoute = require("./routes/admin/productRoute");
+const adminUserRoute = require("./routes/admin/adminUserRoute");
+const userReviewRoute = require("./routes/user/userReviewRoute");
+const profileRoute = require("./routes/user/profileRoute");
 
 require("dotenv").config();
 connectDatabase();
@@ -22,8 +26,11 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/api", authRoute);
-app.use("/api", productRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/products", productRoute);
+app.use("/api/admin", adminUserRoute);
+app.use("/api/reviews", userReviewRoute);
+app.use("/api/profile", profileRoute);
 
 const PORT = process.env.PORT || 5000;
 
