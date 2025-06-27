@@ -12,6 +12,9 @@ connectDatabase();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//tell node to give acess to upload folder
+app.use(express.static("uploads"));
+
 //to check whether API is working or not
 app.get("/", (req, res) => {
   res.status(200).json({
